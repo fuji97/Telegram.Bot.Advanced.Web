@@ -1,0 +1,42 @@
+@model DefaultViewModel
+@{
+    ViewBag.Title = "Home - Telegram Web Data";
+}
+<div class="row big-row">
+  <div class="col-12 col-md-6">
+      <h2>Amministrazione</h2>
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Applica migrazioni</h5>
+          <p class="card-text">Applica tutte le migrazioni in sospeso sul database, da effettuare generalmente dopo un aggiornamento che modifica la struttura del database.</p>
+          <a href="#" onclick="migrateDb(); return false;" class="card-link">Applica le migrazioni</a>
+        </div>
+      </div>
+    </div>
+  <div class="col-12 col-md-6 text-center">
+    <h2>I tuoi bot</h2>
+    <ul class="list-group">
+      @foreach (var bot in Model.Bots) {
+        <a class="list-group-item list-group-item-action" asp-action="Bot" asp-route-key="@bot">@bot</a>
+      }
+    </ul>
+  </div>
+</div>
+
+@section Scripts {
+  <script>
+    function migrateDb() {
+      let request = $.get("@Url.Action("Migrate")", function (data) {
+        if (data.status === 'ok') {
+          showDialog('Aggiornamento completato', '<p>Aggiornamento del database completato con successo</p>');
+        } else {
+          showDialog('Errore', "<p>Si è verificato un problema durante l'aggiornamento del database: " + data.description + "</p>");
+        }
+      }, "json");
+      
+      request.fail(function(js, status, error) {
+        showDialog('Errore nella richiesta', '<p>Status ' + status + '</p><p>Errore: ' + error + '</p>');
+      });
+    }
+  </script>
+}

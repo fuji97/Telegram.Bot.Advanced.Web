@@ -1,0 +1,53 @@
+@model DefaultViewModel
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>@ViewData["Title"]</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="~/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="~/common/styles.css" rel="stylesheet">
+
+</head>
+
+<body>
+  <!-- Modal -->
+  <div class="modal" tabindex="-1" role="dialog" id="modal">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modal-title">TITOLO</h5>
+        </div>
+        <div class="modal-body" id="modal-body">
+          TESTO
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Chiudi</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- Page Content -->
+  <div class="container">
+    @RenderBody()
+  </div>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="~/jquery/jquery.min.js"></script>
+  <script src="~/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="~/common/scripts.js"></script>
+
+  @RenderSection("Scripts", required: false)
+
+</body>
+
+</html>

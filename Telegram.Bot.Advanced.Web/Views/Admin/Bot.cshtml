@@ -1,0 +1,52 @@
+@model TelegramBotDataViewModel
+
+@{
+    ViewBag.Title = $"{Model.Bot.Username} - Telegram Bot Web";
+}
+
+<div class="row big-row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Informazioni</h5>
+        <p class="card-text"><b>Username:</b> @Model.Bot.Username<br/>
+          <b>Endpoint:</b> @Model.Bot.Endpoint<br/>
+          <b>Webhook URL:</b> "@Model.WebhookUrl"</p>
+        <a href="#" onclick="setWebhook(); return false;" class="card-link">Imposta Webhook</a>
+        <a href="#" onclick="deleteWebhook(); return false;" class="card-link">Cancella Webhook</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+@section Scripts {
+  <script>
+    function setWebhook() {
+      let request = $.get("@Url.Action("SetWebhook")", {key: "@Model.Bot.Username"}, function (data) {
+        if (data.status === 'ok') {
+          showDialog('Webhook impostato', '<p>Webhook impostato correttamente!</p><p>Url impostato: ' + data.webhook + '</p>');
+        } else {
+          showDialog('Errore', "<p>Si è verificato un problema durante l'impostazione del webhook: " + data.description + "</p>");
+        }
+      }, "json");
+      
+      request.fail(function(js, status, error) {
+        showDialog('Errore nella richiesta', '<p>Status ' + status + '</p><p>Errore: ' + error + '</p>');
+      });
+    }
+    
+    function deleteWebhook() {
+      let request = $.get("@Url.Action("DeleteWebhook")", {key: "@Model.Bot.Username"}, function (data) {
+        if (data.status === 'ok') {
+          showDialog('Webhook cancellato', '<p>Webhook cancellato correttamente!</p>');
+        } else {
+          showDialog('Errore', "<p>Si è verificato un problema durante la cancellazione del webhook: " + data.description + "</p>");
+        }
+      }, "json");
+      
+      request.fail(function(js, status, error) {
+        showDialog('Errore nella richiesta', '<p>Status ' + status + '</p><p>Errore: ' + error + '</p>');
+      });
+    }
+  </script>
+}

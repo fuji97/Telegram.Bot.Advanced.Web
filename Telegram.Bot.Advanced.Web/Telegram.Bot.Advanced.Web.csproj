@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <Authors>Fuji97</Authors>
+        <Company>Sidereal Works</Company>
+        <Version>1.0.0</Version>
+        <AssemblyVersion>1.0.0</AssemblyVersion>
+        <FileVersion>1.0.0</FileVersion>
+        <Description>An extension for Telegram.Bot.Advanced that adds a Web GUI to manage active bots</Description>
+        <Copyright>Copyright © Federico Rapetti</Copyright>
+        <PackageProjectUrl>https://github.com/fuji97/Telegram.Bot.Advanced.Web</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/fuji97/Telegram.Bot.Advanced.Web</RepositoryUrl>
+        <PackageTags>Telegram Bot Api</PackageTags>
+        <PackageLicenseFile>license.txt</PackageLicenseFile>
+        <LangVersion>8</LangVersion>
+        <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
+        <GenerateEmbeddedFilesManifest>true</GenerateEmbeddedFilesManifest>
+        <PackageVersion>1.0.9</PackageVersion>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.App" Version="2.2.8" />
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.0" />
+        <PackageReference Include="Telegram.Bot.Advanced" Version="3.1.0" />
+        <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="3.1.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Include="license\license.txt" Pack="true" PackagePath="" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Include="wwwroot\**\*" />
+    </ItemGroup>
+
+</Project>
